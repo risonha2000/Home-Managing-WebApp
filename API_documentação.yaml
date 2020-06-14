@@ -1,0 +1,887 @@
+openapi: 3.0.1
+info:
+  title: Home Managing WebApp
+  description: Home Managing WebApp é uma aplicação para para auxiliar na administração de casas ou apartamentos partilhados.
+  contact:
+    name: 'Ema Guedes, Manuel Morais'
+    email: homemanagingapp.prog@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+  version: 1.0.0
+externalDocs:
+  description: Find out more about Swagger
+  url: 'http://swagger.io'
+servers:
+  - url: 'http://localhost:3001/api/v1'
+tags:
+  - name: proprietario
+    description: Todos os dados do proprietario.
+  - name: inquilino
+    description: Todos os dados do inquilino.
+  - name: casa
+    description: Todos os dados da casa ou apartamento.
+  - name: quarto
+    description: Todos os dados do quarto.
+  - name: despesas
+    description: Despesas da casa ou apartamento.
+paths:
+  /inquilinos:
+    get:
+      tags:
+        - inquilino
+      summary: Retorna os dados de todos os inquilinos.
+      operationId: inquilinos_list
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListaInquilinos'
+        '400':
+          description: Erro na execução do pedido.
+          content: {}
+        '404':
+          description: Erro na execução do pedido.
+          content: {}
+  /inquilino:
+    get:
+      tags:
+        - inquilino
+      summary: Retorna os dados do inquilino de acordo com o ID recebido.
+      operationId: inquilino_detail
+      parameters:
+        - name: inquilinoId
+          in: path
+          description: ID do inquilino.
+          required: true
+          schema:
+            minimum: 1
+            type: integer
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inquilino'
+        '400':
+          description: Erro na execução do pedido. O ID do inquilino não é válido.
+          content: {}
+        '404':
+          description: Erro na execução do pedido.
+          content: {}
+    put:
+      tags:
+        - inquilino
+      summary: Atualiza um inquilino existente de acordo com os dados recebidos.
+      operationId: inquilino_update
+      requestBody:
+        description: Os dados do inquilino a atualizar.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Inquilino'
+        required: false
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inquilino'
+        '400':
+          description: Erro na execução do pedido. Os dados do inquilino não são válidos.
+          content: {}
+        '404':
+          description: Erro na execução do pedido.
+          content: {}
+      x-codegen-request-body-name: inquilino
+    post:
+      tags:
+        - inquilino
+      summary: Cria um inquilino de acordo com os dados recebidos.
+      operationId: inquilino_create
+      requestBody:
+        description: A criar inquilino.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Inquilino'
+        required: false
+      responses:
+        '201':
+          description: Operação realizada com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inquilino'
+        '400':
+          description: Erro na execução do pedido. Os dados do inquilino não são válidos.
+          content: {}
+        '404':
+          description: Erro na execução do pedido.
+          content: {}
+      x-codegen-request-body-name: inquilino
+    delete:
+      tags:
+        - inquilino
+      summary: Apaga o inquilino de acordo com o ID.
+      operationId: inquilino_delete
+      parameters:
+        - name: inquilinoId
+          in: path
+          description: ID do inquilino.
+          required: true
+          schema:
+            minimum: 1
+            type: integer
+      responses:
+        '204':
+          description: Operação realizada com sucesso.
+          content: {}
+        '400':
+          description: Erro na execução do pedido. O ID do inquilino não é válido.
+          content: {}
+        '404':
+          description: Erro na execução do pedido.
+          content: {}
+  /Despesas:
+    get:
+      tags:
+        - despesas
+      summary: Retorna os dados das despesas.
+      operationId: despesas_list
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListaDespesas'
+        '400':
+          description: Erro na execução do pedido.
+          content: {}
+        '404':
+          description: Erro na execução do pedido.
+          content: {}
+  /despesa:
+    get:
+      tags:
+        - despesas
+      summary: Retorna as despesas de acordo com o ID recebido.
+      operationId: despesas_detail
+      parameters:
+        - name: despesasId
+          in: path
+          description: ID das despesas.
+          required: true
+          schema:
+            minimum: 1
+            type: integer
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Despesas'
+        '400':
+          description: Erro na execução do pedido. O ID das despesas não é válido.
+          content: {}
+        '404':
+          description: Erro na execução do pedido.
+          content: {}
+    put:
+      tags:
+        - despesas
+      summary: Atualiza as despesas existentes de acordo com os dados recebidos.
+      operationId: despesas_update
+      requestBody:
+        description: Os dados das despesas a atualizar.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Despesas'
+        required: false
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Despesas'
+        '400':
+          description: Erro na execução do pedido. Os dados das despesas não são válidos.
+          content: {}
+        '404':
+          description: Erro na execução do pedido.
+          content: {}
+      x-codegen-request-body-name: despesas
+    post:
+      tags:
+        - despesas
+      summary: Cria despesas de acordo com os dados recebidos.
+      operationId: despesas_create
+      requestBody:
+        description: A criar despesas.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Despesas'
+        required: false
+      responses:
+        '201':
+          description: Operação realizada com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Despesas'
+        '400':
+          description: Erro na execução do pedido. Os dados das despesas não são válidos.
+          content: {}
+        '404':
+          description: Erro na execução do pedido.
+          content: {}
+      x-codegen-request-body-name: despesas
+    delete:
+      tags:
+        - despesas
+      summary: Apaga as despesas de acordo com o ID.
+      operationId: despesas_delete
+      parameters:
+        - name: despesasId
+          in: path
+          description: ID das despesas.
+          required: true
+          schema:
+            minimum: 1
+            type: integer
+      responses:
+        '204':
+          description: Operação realizada com sucesso.
+          content: {}
+        '400':
+          description: Erro na execução do pedido. O ID das despesas não é válido.
+          content: {}
+        '404':
+          description: Erro na execução do pedido.
+          content: {}
+  /quartos:
+    get:
+      tags:
+        - quarto
+      summary: Retorna os dados de todos os quartos.
+      operationId: quartos_list
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListaQuartos'
+        '400':
+          description: Erro na execução do pedido.
+          content: {}
+        '404':
+          description: Erro na execução do pedido.
+          content: {}
+  /quarto:
+    get:
+      tags:
+        - quarto
+      summary: Retorna os dados do quarto de acordo com o ID recebido.
+      operationId: quarto_detail
+      parameters:
+        - name: quartoId
+          in: path
+          description: ID do quarto.
+          required: true
+          schema:
+            minimum: 1
+            type: integer
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quarto'
+        '400':
+          description: Erro na execução do pedido. O ID do quarto não é válido.
+          content: {}
+        '404':
+          description: Erro na execução do pedido.
+          content: {}
+    put:
+      tags:
+        - quarto
+      summary: Atualiza um quarto existente de acordo com os dados recebidos.
+      operationId: quarto_update
+      requestBody:
+        description: Os dados do quarto a atualizar.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Quarto'
+        required: false
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quarto'
+        '400':
+          description: Erro na execução do pedido. Os dados do quarto não são válidos.
+          content: {}
+        '404':
+          description: Erro na execução do pedido.
+          content: {}
+      x-codegen-request-body-name: quarto
+    post:
+      tags:
+        - quarto
+      summary: Cria um quarto de acordo com os dados recebidos.
+      operationId: quarto_create
+      requestBody:
+        description: A criar quarto.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Quarto'
+        required: false
+      responses:
+        '201':
+          description: Operação realizada com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quarto'
+        '400':
+          description: Erro na execução do pedido. Os dados do quarto não são válidos.
+          content: {}
+        '404':
+          description: Erro na execução do pedido.
+          content: {}
+      x-codegen-request-body-name: quarto
+    delete:
+      tags:
+        - quarto
+      summary: Apaga o quarto de acordo com o ID.
+      operationId: quarto_delete
+      parameters:
+        - name: quartoId
+          in: path
+          description: ID do quarto.
+          required: true
+          schema:
+            minimum: 1
+            type: integer
+      responses:
+        '204':
+          description: Operação realizada com sucesso.
+          content: {}
+        '400':
+          description: Erro na execução do pedido. O ID do quarto não é válido.
+          content: {}
+        '404':
+          description: Erro na execução do pedido.
+          content: {}
+  /casas:
+    get:
+      tags:
+        - casa
+      summary: Retorna os dados de todas as casas.
+      operationId: casas_list
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListaCasas'
+        '400':
+          description: Erro na execução do pedido.
+          content: {}
+        '404':
+          description: Erro na execução do pedido.
+          content: {}
+  /casa:
+    get:
+      tags:
+        - casa
+      summary: Retorna os dados da casa de acordo com o ID recebido.
+      operationId: casa_detail
+      parameters:
+        - name: casaId
+          in: path
+          description: ID da casa.
+          required: true
+          schema:
+            minimum: 1
+            type: integer
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Casa'
+        '400':
+          description: Erro na execução do pedido. O ID da casa não é válido.
+          content: {}
+        '404':
+          description: Erro na execução do pedido.
+          content: {}
+    put:
+      tags:
+        - casa
+      summary: Atualiza uma casa existente de acordo com os dados recebidos.
+      operationId: casa_update
+      requestBody:
+        description: Os dados da casa a atualizar.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Casa'
+        required: false
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Casa'
+        '400':
+          description: Erro na execução do pedido. Os dados da casa não são válidos.
+          content: {}
+        '404':
+          description: Erro na execução do pedido.
+          content: {}
+      x-codegen-request-body-name: casa
+    post:
+      tags:
+        - casa
+      summary: Cria uma nova casa de acordo com os dados recebidos.
+      operationId: casa_create
+      requestBody:
+        description: A criar casa.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Casa'
+        required: false
+      responses:
+        '201':
+          description: Operação realizada com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Casa'
+        '400':
+          description: Erro na execução do pedido. Os dados da casa não são válidos.
+          content: {}
+        '404':
+          description: Erro na execução do pedido.
+          content: {}
+      x-codegen-request-body-name: casa
+    delete:
+      tags:
+        - casa
+      summary: Apaga a casa de acordo com o ID.
+      operationId: casa_delete
+      parameters:
+        - name: casaId
+          in: path
+          description: ID da casa.
+          required: true
+          schema:
+            minimum: 1
+            type: integer
+      responses:
+        '204':
+          description: Operação realizada com sucesso.
+          content: {}
+        '400':
+          description: Erro na execução do pedido. O ID da casa não é válido.
+          content: {}
+        '404':
+          description: Erro na execução do pedido.
+          content: {}
+  /proprietario:
+    get:
+      tags:
+        - proprietario
+      summary: Retorna os dados do proprietario de acordo com o ID recebido.
+      operationId: proprietario_detail
+      parameters:
+        - name: proprietarioId
+          in: path
+          description: ID do proprietario.
+          required: true
+          schema:
+            minimum: 1
+            type: integer
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Proprietario'
+        '400':
+          description: Erro na execução do pedido. O ID do proprietario não é válido.
+          content: {}
+        '404':
+          description: Erro na execução do pedido.
+          content: {}
+    put:
+      tags:
+        - proprietario
+      summary: Atualiza o proprietario existente de acordo com os dados recebidos.
+      operationId: proprietario_update
+      requestBody:
+        description: Os dados do proprietario a atualizar.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Proprietario'
+        required: false
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Proprietario'
+        '400':
+          description: Erro na execução do pedido. Os dados do proprietario não são válidos.
+          content: {}
+        '404':
+          description: Erro na execução do pedido.
+          content: {}
+      x-codegen-request-body-name: proprietario
+    post:
+      tags:
+        - proprietario
+      summary: Cria um proprietario de acordo com os dados recebidos.
+      operationId: proprietario_create
+      requestBody:
+        description: A criar proprietario.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Proprietario'
+        required: false
+      responses:
+        '201':
+          description: Operação realizada com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Proprietario'
+        '400':
+          description: Erro na execução do pedido. Os dados do proprietario não são válidos.
+          content: {}
+        '404':
+          description: Erro na execução do pedido.
+          content: {}
+      x-codegen-request-body-name: proprietario
+  /inquilino/login:
+    get:
+      tags:
+        - inquilino
+      summary: inquilino entra na conta
+      operationId: inquilino_login
+      parameters:
+        - name: inquilinoId
+          in: query
+          description: Id do inquilino para entrar na conta.
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: Senha para entrar.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Operação bem sucedida
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Invalid username/password supplied
+          content: {}
+  /inquilino/logout:
+    get:
+      tags:
+        - inquilino
+      summary: O inquilino sai da sua conta.
+      operationId: inquilino_logout
+      responses:
+        default:
+          description: Operação bem sucedida
+          content: {}
+  /proprietario/login:
+    get:
+      tags:
+        - proprietario
+      summary: proprietario entra na conta
+      operationId: proprietario_login
+      parameters:
+        - name: proprietarioId
+          in: query
+          description: Id do proprietario para entrar na conta.
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: Senha para entrar.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Operação bem sucedida
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Invalid username/password supplied
+          content: {}
+  /proprietario/logout:
+    get:
+      tags:
+        - proprietario
+      summary: O proprietario sai da sua conta.
+      operationId: proprietario_logout
+      responses:
+        default:
+          description: Operação bem sucedida
+          content: {}
+  /casa/login:
+    get:
+      tags:
+        - casa
+      summary: Inquilino entra na casa.
+      operationId: casa_login
+      parameters:
+        - name: casaId
+          in: query
+          description: Id da casa para entrar na casa.
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: Senha para entrar.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Operação bem sucedida
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Invalid username/password supplied.
+          content: {}
+  /casa/logout:
+    get:
+      tags:
+        - casa
+      summary: O inquilino sai da casa.
+      operationId: casa_logout
+      responses:
+        default:
+          description: Operação bem sucedida
+          content: {}
+components:
+  schemas:
+    ListaCasas:
+      type: array
+      items:
+        $ref: '#/components/schemas/Casa'
+    ListaInquilinos:
+      type: array
+      items:
+        $ref: '#/components/schemas/Inquilino'
+    ListaDespesas:
+      type: array
+      items:
+        $ref: '#/components/schemas/Despesas'
+    ListaQuartos:
+      type: array
+      items:
+        $ref: '#/components/schemas/Quarto'
+    Casa:
+      required:
+        - casaId
+        - password
+        - morada
+      type: object
+      properties:
+        casaId:
+          type: integer
+          format: int64
+        password:
+          type: string
+          format: password
+        morada:
+          type: string
+          format: string
+        quartos:
+          $ref: '#/components/schemas/Quarto'
+        despesas:
+          $ref: '#/components/schemas/Despesas'
+    Despesas:
+      required:
+        - despesasId
+        - dataPub
+        - dataFinal
+        - dataMes
+      type: object
+      properties:
+        despesasId:
+          type: integer
+          format: int64
+        dataPub:
+          type: string
+          format: date
+        dataFinal:
+          type: string
+          format: date
+        dataMes:
+          type: string
+          format: string
+        agua:
+          type: number
+          format: double
+        eletricidade:
+          type: number
+          format: double
+        gas:
+          type: number
+          format: double
+        limpezas:
+          type: number
+          format: double
+        seguranca:
+          type: number
+          format: double
+        totalCasa:
+          type: number
+          format: double
+        totalDiv:
+          type: number
+          format: double
+    Quarto:
+      required:
+        - quartoId
+        - descricao
+        - custoQuarto
+      type: object
+      properties:
+        quartoId:
+          type: integer
+          format: int64
+        descricao:
+          type: string
+          format: string
+        custoQuarto:
+          type: integer
+          format: int64
+        inquilino:
+          $ref: '#/components/schemas/Inquilino'
+    Inquilino:
+      required:
+        - inquilinoId
+        - password
+        - nome
+        - idade
+        - sexo
+        - email
+        - morada
+        - telemovel
+        - NIF
+      type: object
+      properties:
+        inquilinoId:
+          type: integer
+          format: int64
+        password:
+          type: string
+          format: password
+        nome:
+          type: string
+          format: string
+        idade:
+          type: integer
+          format: int64
+        sexo:
+          type: string
+          format: string
+        email:
+          type: string
+          format: string
+        morada:
+          type: string
+          format: string
+        telemovel:
+          type: integer
+          format: int64
+        NIF:
+          type: integer
+          format: int64
+    Proprietario:
+      required:
+        - proprietarioId
+        - password
+        - nome
+        - idade
+        - sexo
+        - email
+        - morada
+        - telemovel
+        - NIF
+      type: object
+      properties:
+        proprietarioId:
+          type: integer
+          format: int64
+        nome:
+          type: string
+          format: string
+        password:
+          type: string
+          format: password
+        idade:
+          type: integer
+          format: int64
+        sexo:
+          type: string
+          format: string
+        email:
+          type: string
+          format: string
+        morada:
+          type: string
+          format: string
+        telemovel:
+          type: integer
+          format: int64
+        NIF:
+          type: integer
+          format: int64
+        casas:
+          $ref: '#/components/schemas/Casa'
